@@ -2,6 +2,7 @@ import './App.css';
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/LoginPage";
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/register"  />
+        <Route path="/register" element={<RegisterPage />} />
         {isLoggedIn ? (
           <>
             <Route
