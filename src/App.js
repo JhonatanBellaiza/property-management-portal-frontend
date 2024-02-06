@@ -9,6 +9,7 @@ import AuthContext from "./AuthContext";
 import { React, useState } from "react";
 import AddPropertyModal from "./AddPropertyModal";
 import RegisterPage from "./pages/RegisterPage";
+import AddProperty from "./pages/AddProperty";
 
 
 axios.interceptors.request.use(function (config) {
@@ -59,9 +60,9 @@ function App() {
           <NavBarComponent />
           <div>
             <Routes>
-              {/* <Route exect path="/" element={<Home />}></Route>
-              <Route path="/home" element={<Properties />}></Route>  
-               <Route path="/about" element={<about />}></Route> */}
+             {/*  <Route exect path="/" element={<Home />}></Route>
+              <Route path="/home" element={<Properties />}></Route>  */} 
+               <Route path="/add-property" element={<AddProperty />}></Route>
               <Route path="/signup" element={<RegisterPage />}></Route>
               <Route path="/login" element={<LoginPage />}></Route>
             </Routes>
