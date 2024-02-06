@@ -81,7 +81,7 @@ const Register = () => {
 
         if (response.status === 200) {
           console.log('SUCCESSFUL REGISTERED')
-          navigate('/');
+          navigate('/login');
         }
       } catch (error) {
         console.error("Registration failed. Please try again.", error);
