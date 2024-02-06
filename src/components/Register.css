@@ -35,7 +35,7 @@
     padding: 10px;
     outline: none;
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
-    margin-bottom: 25px; /* Increase margin-bottom for more space */
+    margin-bottom: 15px;
   }
   
   .register-checkbox-container {
