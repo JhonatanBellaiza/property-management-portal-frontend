@@ -79,7 +79,7 @@ const Login = () => {
           </button>
           <p className="text-sm font-light">
             Create an Account:{" "}
-            <Link to="/register" className="login-link">
+            <Link to="/signup" className="login-link">
               Sign up
             </Link>
           </p>
