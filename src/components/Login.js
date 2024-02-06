@@ -1,14 +1,13 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAlert } from 'react-alert';
 import "./Login.css";
 
 const Login = () => {
-  //const alert = useAlert();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,17 +27,16 @@ const Login = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("user_id", response.data.user_id);
         localStorage.setItem("role_id", response.data.role_id);
-        console.log(token)
-        //alert.success("Logged in")
-        console.log('SUCCESSFUL LOGIN')
+        console.log(token);
+        console.log("SUCCESSFUL LOGIN");
         navigate("/home");
       } else {
         console.error("Login failed");
-       // alert.error("Login failed. Please check your credentials and try again.");
+        setError("Invalid email or password. Please try again.");
       }
     } catch (error) {
       console.error("An error occurred during login:", error);
-      //alert.error("An error occurred during login. Please try again later.");
+      setError("Invalid email or password.");
     }
   };
 
@@ -48,7 +46,9 @@ const Login = () => {
         <h1 className="login-header">Sign in to your account</h1>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="block mb-2 text-sm font-medium">Your email</label>
+            <label htmlFor="email" className="block mb-2 text-sm font-medium">
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -60,7 +60,9 @@ const Login = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block mb-2 text-sm font-medium">Password</label>
+            <label htmlFor="password" className="block mb-2 text-sm font-medium">
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -71,18 +73,13 @@ const Login = () => {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="login-button"
-          >
+          {error && <p className="text-red-500">{error}</p>}
+          <button type="submit" className="login-button">
             Sign in
           </button>
           <p className="text-sm font-light">
-            Don’t have an account yet?{" "}
-            <Link
-              to="/register"
-              className="login-link"
-            >
+            Create an Account:{" "}
+            <Link to="/register" className="login-link">
               Sign up
             </Link>
           </p>
