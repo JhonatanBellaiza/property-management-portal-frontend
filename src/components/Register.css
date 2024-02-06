@@ -1,14 +1,8 @@
-body {
+
+  .register-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f3f4f6;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .register-container {
     width: 100%;
     max-width: 400px;
     background-color: #ffffff;

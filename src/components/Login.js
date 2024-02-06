@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAlert } from 'react-alert';
 import "./Login.css";
 
 const Login = () => {
