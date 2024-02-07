@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 const PropertyEditForm = ({ property, onSave, onCancel }) => {
-  const [updatedProperty, setUpdatedProperty] = useState(property);
+  const [updatedProperty, setUpdatedProperty] = useState(property)
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedProperty(prevProperty => ({
+    const { name, value } = e.target
+    setUpdatedProperty((prevProperty) => ({
       ...prevProperty,
-      [name]: value
-    }));
-  };
+      [name]: value,
+    }))
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(updatedProperty);
-  };
+    e.preventDefault()
+    onSave(updatedProperty)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -40,13 +40,16 @@ const PropertyEditForm = ({ property, onSave, onCancel }) => {
       </div>
       <div className="form-group">
         <label>Sale Type:</label>
-        <input
-          type="text"
+        <select
           className="form-control"
           name="propertySaleType"
           value={updatedProperty.propertySaleType}
           onChange={handleChange}
-        />
+        >
+          <option value="">Select Sale Type</option>
+          <option value="Rent">Rent</option>
+          <option value="Sale">Sale</option>
+        </select>
       </div>
       <div className="form-group">
         <label>Number of Rooms:</label>
@@ -60,18 +63,26 @@ const PropertyEditForm = ({ property, onSave, onCancel }) => {
       </div>
       <div className="form-group">
         <label>Status:</label>
-        <input
-          type="text"
+        <select
           className="form-control"
           name="propertyStatus"
           value={updatedProperty.propertyStatus}
           onChange={handleChange}
-        />
+        >
+          <option value="">Select Status</option>
+          <option value="Available">Available</option>
+          <option value="Pending">Pending</option>
+          <option value="Contingent">Contingent</option>
+        </select>
       </div>
-      <button type="submit" className="btn btn-primary mr-2">Save</button>
-      <button type="button" className="btn btn-secondary" onClick={onCancel}>Cancel</button>
+      <button type="submit" className="btn btn-primary mr-2">
+        Save
+      </button>
+      <button type="button" className="btn btn-secondary" onClick={onCancel}>
+        Cancel
+      </button>
     </form>
-  );
-};
+  )
+}
 
-export default PropertyEditForm;
+export default PropertyEditForm
