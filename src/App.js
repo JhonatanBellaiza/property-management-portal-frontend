@@ -11,6 +11,7 @@ import AddPropertyModal from "./AddPropertyModal";
 import RegisterPage from "./pages/RegisterPage";
 import AddProperty from "./pages/AddProperty";
 import Dashboard from "./pages/AdminDashboard"
+import ManageRequest from "./pages/ManageRequestPage";
 
 
 axios.interceptors.request.use(function (config) {
@@ -67,6 +68,7 @@ function App() {
               <Route path="/signup" element={<RegisterPage />}></Route>
               <Route path="/login" element={<LoginPage />}></Route>
               <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/manage-requests" element={<ManageRequest />}></Route>
             </Routes>
           </div>
           <FooterComponent />
