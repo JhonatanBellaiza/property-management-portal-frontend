@@ -6,6 +6,7 @@ import { useContext } from 'react'
 const NavBarComponent = () => {
   const auth = useContext(AuthContext)
 
+  localStorage.getItem("role_id")
   const logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
@@ -78,8 +79,11 @@ const NavBarComponent = () => {
   }
   const hasRoleCustomer = () => {
     try {
-      if (auth.user.realm_access.roles.includes('Customer')) {
+      if (localStorage.getItem("userType"
+      ) == "Customer") {
         return true
+      } else { 
+        return false
       }
     } catch (error) {
       return false

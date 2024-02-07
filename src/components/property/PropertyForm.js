@@ -65,14 +65,19 @@ const PropertyForm = ({ onSubmit }) => {
           />
         </div>
         <div className="form-group py-2">
-          <input
-            type="text"
+          <select
             className="form-control"
             name="propertyHomeType"
             value={formData.propertyHomeType}
             onChange={handleChange}
-            placeholder="Home Type"
-          />
+          >
+            <option value="">Select Home Type</option>
+            <option value="Congo">Congo</option>
+            <option value="Duplex">Duplex</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Ranch">Ranch</option>
+            <option value="TownHouse">TownHouse</option>
+          </select>
         </div>
         <div className="form-group py-2">
           <select
