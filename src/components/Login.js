@@ -43,7 +43,7 @@ const Login = () => {
             window.location.href = '/admin-dashboard'
             break
           default:
-            navigate('/home')
+            window.location.href = '/home'
             break
         }
       } else {

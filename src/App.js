@@ -11,7 +11,6 @@ import AddProperty from "./pages/AddProperty";
 import AdmninDashboard from "./pages/AdminDashboard"
 import ManageRequest from "./pages/ManageRequestPage";
 import OwnerDashboard from "./pages/OwnerDashboard";
-import PropertyPage from "./pages/PropertyPage";
 import AddOffer from "./pages/AddOffer";
 import Home from "./pages/Home";
 import ViewProperty from "./pages/ViewProperty";

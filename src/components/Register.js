@@ -31,7 +31,7 @@ const Register = () => {
     lastName: "",
     email: "",
     password: "",
-    userType: "",
+    userType: "Customer",
   });
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
@@ -65,27 +65,21 @@ const Register = () => {
     event.preventDefault();
 
     if (validateForm()) {
-      try {
-        const { email, password, firstName, lastName, userType } = formData;
+      const { email, password, firstName, lastName, userType } = formData;
 
-        const response = await axios.post(API_URL, {
-          email: email,
-          password: password,
-          firstName: firstName,
-          lastName: lastName,
-          status: 0,
-          active: true,
-          userType: userType,
-        });
-
-        if (response.status === 200) {
-          console.log('SUCCESSFUL REGISTERED')
-          console.log(response);
-          navigate('/login');
-        }
-      } catch (error) {
+      const response = await axios.post(API_URL, {
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        active: true,
+        userType: userType,
+      }).then((response) => {
+        navigate('/login');
+      }).catch((error) => {
         console.error("Registration failed. Please try again.", error);
-      }
+      });
+
     }
   };
 
