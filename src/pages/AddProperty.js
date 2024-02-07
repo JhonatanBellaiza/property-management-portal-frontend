@@ -1,73 +1,31 @@
-import React from "react";
-import "./Add-prop.css"
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import PropertyForm from '../components/property/PropertyForm'
+import PropertyService from '../components/property/PropertyService' // Assuming you have a service for handling property data
 
-const AddProperty = (/* { isOpen, onClose, onSubmit, propertyData, handlePropertyChange, handleAddressChange } */) => {
-    return (
-        <div className="add-property">
-            <div className="relative w-full max-w-2xl">
-                <div className="relative bg-white rounded-lg shadow max-h-500">
-                    <div className="flex items-start justify-center p-4 border-b rounded-t">
-                        <h2 className="text-xl font-semibold text-gray-900">Add Property</h2>
+const AddProperty = () => {
+  const navigate = useNavigate()
+  const handleSubmit = async (data) => {
+    // Assuming PropertyService has a method to add property data
+    try {
+      await PropertyService.addProperty(data)
+      navigate('/owner-dashboard')
+    } catch (error) {
+      console.error('Error adding property:', error)
+      // Optionally, handle error state or display error message
+    }
+  }
 
-                    </div>
-                    <div className="p-6 space-y-4">
-                        <div className="mb-2">
-                            <label className="block text-sm font-medium mb-1">Home Type</label>
-                            <input
-                                className="w-full h-8 border border-gray-300 rounded-md px-3"
-                                type="text"
-                                name="name"
-                            /*  value={propertyData.name}
-                             onChange={handlePropertyChange} */
-                            />
-                        </div>
-                        <div className="grid grid-cols-2 gap-2 mb-2">
-                            <div>
-                                <label className="block text-sm font-medium mb-1">Number of rooms</label>
-                                <input
-                                    className="w-full h-8 border border-gray-300 rounded-md px-3"
-                                    type="number"
-                                    name="bedNo"
-                                /*  value={propertyData.bedNo}
-                                 onChange={handlePropertyChange} */
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-1">Location</label>
-                                <input
-                                    className="w-full h-8 border border-gray-300 rounded-md px-3"
-                                    type="text"
-                                    name="bathNo"
-                                /* value={propertyData.bathNo}
-                                onChange={handlePropertyChange} */
-                                />
-                            </div>
-                        </div>
-                        <div className="mb-2">
-                            <label className="block text-sm font-medium mb-1">Sale Type</label>
-                            <input
-                                className="w-full h-8 border border-gray-300 rounded-md px-3"
-                                type="text"
-                                name="sqft"
-                            /*  value={propertyData.sqft}
-                             onChange={handlePropertyChange} */
-                            />
-                        </div>
-                    </div>
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Insert photo    </label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1" />
-                        </div>
-                    </form>
-                    <div className="flex items-center justify-end p-6 border-t border-gray-200 rounded-b">
-                        <button type="button" class="btn btn-primary btn-lg">Add</button>
-                        <button type="button" class="btn btn-secondary btn-lg">Cancel</button>
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="container">
+      <div className="row justify-content-center mt-5">
+        <div className="col-md-6">
+          <h1 className="text-center mb-4">Add Property Page</h1>
+          <PropertyForm onSubmit={handleSubmit} />
         </div>
-    );
-};
+      </div>
+    </div>
+  )
+}
 
-export default AddProperty;
+export default AddProperty

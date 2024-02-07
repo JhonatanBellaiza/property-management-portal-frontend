@@ -1,45 +1,60 @@
-import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import "./Login.css";
+import React, { useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import './Login.css'
 
 const Login = () => {
-  //const alert = useAlert();
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const navigate = useNavigate();
+  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
+  const navigate = useNavigate()
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    const email = emailRef.current.value
+    const password = passwordRef.current.value
 
     const loginData = {
       email,
       password,
-    };
+    }
 
     try {
-      const response = await axios.post("http://localhost:8080/api/login", loginData);
+      const response = await axios.post(
+        'http://localhost:8080/api/login',
+        loginData
+      )
       if (response.status === 200) {
-        const token = response.data.token;
-        localStorage.setItem("token", token);
-        localStorage.setItem("user_id", response.data.user.id);
-        localStorage.setItem("role_id", response.data.user.userType);
+        const token = response.data.token
+        localStorage.setItem('token', token)
+        localStorage.setItem('userId', response.data.user.id)
+        localStorage.setItem('userType', response.data.user.userType)
+        localStorage.setItem('userName', response.data.user.lastName)
         console.log(token)
-        //alert.success("Logged in")
         console.log('SUCCESSFUL LOGIN')
-        navigate("/home");
+        console.log(response.data.user.userType)
+
+        switch (response.data.user.userType) {
+          case 'Owner':
+            window.location.href = '/owner-dashboard'
+            break
+          case 'Admin':
+            window.location.href = '/admin-dashboard'
+            break
+          default:
+            navigate('/home')
+            break
+        }
       } else {
-        console.error("Login failed");
-       // alert.error("Login failed. Please check your credentials and try again.");
+        console.error('Login failed')
+        setError('Invalid email or password. Please try again.')
       }
     } catch (error) {
-      console.error("An error occurred during login:", error);
-      //alert.error("An error occurred during login. Please try again later.");
+      console.error('An error occurred during login:', error)
+      setError('Invalid email or password.')
     }
-  };
+  }
 
   return (
     <div className="login-container">
@@ -47,7 +62,9 @@ const Login = () => {
         <h1 className="login-header">Sign in to your account</h1>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="block mb-2 text-sm font-medium">Your email</label>
+            <label htmlFor="email" className="block mb-2 text-sm font-medium">
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -59,7 +76,12 @@ const Login = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block mb-2 text-sm font-medium">Password</label>
+            <label
+              htmlFor="password"
+              className="block mb-2 text-sm font-medium"
+            >
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -70,26 +92,20 @@ const Login = () => {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="login-button"
-            onClick={handleSubmit}
-          >
+          {error && <p className="text-red-500">{error}</p>}
+          <button type="submit" className="login-button">
             Sign in
           </button >
           <p className="text-sm font-light">
-            Don’t have an account yet?{" "}
-            <Link
-              to="/register"
-              className="login-link"
-            >
+            Create an Account:{' '}
+            <Link to="/signup" className="login-link">
               Sign up
             </Link>
           </p>
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

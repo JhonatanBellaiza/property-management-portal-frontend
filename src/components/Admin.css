@@ -1,0 +1,22 @@
+.user-list {
+    text-align: center;
+    max-width: 600px; /* Adjust the max-width as needed */
+    margin: 0 auto; /* Center the content */
+  }
+  
+  .user-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .user-list th, .user-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .manage-requests-button {
+    margin-top: 20px;
+    text-align: center;
+  }

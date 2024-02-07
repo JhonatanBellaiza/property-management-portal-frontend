@@ -5,8 +5,8 @@ import "./Register.css"; // Import the CSS file
 
 const API_URL = "http://localhost:8080/api/register";
 
-const InputField = ({ label, type, name, placeholder, required }) => (
-  <div>
+const InputField = ({ label, type, name, placeholder, required, value, onChange, error }) => (
+  <div className="mb-4">
     <label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
       {label}
     </label>
@@ -14,46 +14,79 @@ const InputField = ({ label, type, name, placeholder, required }) => (
       type={type}
       name={name}
       id={name}
-      className="input-field"
+      className={`input-field ${error ? "border-red-500" : ""}`}
       placeholder={placeholder}
       required={required}
+      value={value}
+      onChange={onChange}
     />
+    {error && <span className="text-red-500">{error}</span>}
   </div>
 );
 
 const Register = () => {
-  const [isOwner, setIsOwner] = useState(false);
+  //const [userType, setUserType] = useState("user");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    userType: "",
+  });
+  const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
+
+  const validateForm = () => {
+    const errors = {};
+
+    Object.keys(formData).forEach((key) => {
+      if (!formData[key]) {
+        errors[key] = "This field is required";
+      }
+    });
+
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Invalid email address";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const { email, password, firstName, lastName } = event.target.elements;
 
-      const roleId = isOwner ? 2 : 3;
+    if (validateForm()) {
+      try {
+        const { email, password, firstName, lastName, userType } = formData;
 
-      const response = await axios.post(API_URL, {
-        email: email.value,
-        password: password.value,
-        firstname: firstName.value,
-        lastname: lastName.value,
-        status: 0,
-        isSend: false,
-        role: { id: roleId },
-      });
+        const response = await axios.post(API_URL, {
+          email: email,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          status: 0,
+          isSend: false,
+          userType: userType,
+        });
 
-      if (response.status === 200) {
-        //alert.success("Registered successfully");
-        console.log('SUCCESSFUL REGISTERED')
-        navigate('/');
+        if (response.status === 200) {
+          console.log('SUCCESSFUL REGISTERED')
+          console.log(response);
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error("Registration failed. Please try again.", error);
       }
-    } catch (error) {
-      //alert.error("Registration failed. Please try again.");
     }
-  };
-
-  const handleCheckboxChange = (event) => {
-    setIsOwner(event.target.checked);
   };
 
   return (
@@ -61,27 +94,64 @@ const Register = () => {
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1 className="register-title">Create an account</h1>
         <form className="register-form" onSubmit={handleSubmit}>
-          <InputField label="First Name" type="text" name="firstName" placeholder="Enter your first name" required />
-          <InputField label="Last Name" type="text" name="lastName" placeholder="Enter your last name" required />
-          <InputField label="Email" type="email" name="email" placeholder="name@company.com" required />
-          <InputField label="Password" type="password" name="password" placeholder="••••••••" required />
+          <InputField
+            label="First Name"
+            type="text"
+            name="firstName"
+            placeholder="Enter your first name"
+            required
+            value={formData.firstName}
+            onChange={handleInputChange}
+            error={formErrors.firstName}
+          />
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="remember"
-                  type="checkbox"
-                  className="register-checkbox"
-                  onChange={handleCheckboxChange}
-                />
-              </div>
-              <div className="ml-3 text-sm">
-                <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">
-                  Sign up as {isOwner ? "Owner" : "User"}
-                </label>
-              </div>
-            </div>
+          <InputField
+            label="Last Name"
+            type="text"
+            name="lastName"
+            placeholder="Enter your last name"
+            required
+            value={formData.lastName}
+            onChange={handleInputChange}
+            error={formErrors.lastName}
+          />
+
+          <InputField
+            label="Email"
+            type="email"
+            name="email"
+            placeholder="name@company.com"
+            required
+            value={formData.email}
+            onChange={handleInputChange}
+            error={formErrors.email}
+          />
+
+          <InputField
+            label="Password"
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            required
+            value={formData.password}
+            onChange={handleInputChange}
+            error={formErrors.password}
+          />
+
+          <div className="mb-4">
+            <label htmlFor="userType" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              User Type
+            </label>
+            <select
+              id="userType"
+              name="userType"
+              className="input-field"
+              onChange={handleInputChange}
+              value={formData.userType}
+            >
+              <option value="Customer" >Customer</option>
+              <option value="Owner">Owner</option>
+            </select>
           </div>
 
           <button type="submit" className="register-button">
