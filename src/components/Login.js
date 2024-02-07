@@ -1,44 +1,54 @@
-import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import "./Login.css";
+import React, { useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import './Login.css'
 
 const Login = () => {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
+  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
+  const navigate = useNavigate()
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    const email = emailRef.current.value
+    const password = passwordRef.current.value
 
     const loginData = {
       email,
       password,
-    };
+    }
 
     try {
-      const response = await axios.post("http://localhost:8080/api/login", loginData);
+      const response = await axios.post(
+        'http://localhost:8080/api/login',
+        loginData
+      )
       if (response.status === 200) {
-        const token = response.data.accessToken;
-        localStorage.setItem("token", token);
-        localStorage.setItem("user_id", response.data.user_id);
-        localStorage.setItem("role_id", response.data.role_id);
-        console.log(token);
-        console.log("SUCCESSFUL LOGIN");
-        navigate("/home");
+        const token = response.data.token
+        localStorage.setItem('token', token)
+        localStorage.setItem('userId', response.data.user.id)
+        localStorage.setItem('userType', response.data.user.userType)
+        localStorage.setItem('userName', response.data.user.lastName)
+        console.log(token)
+        console.log('SUCCESSFUL LOGIN')
+        console.log(response.data.user.userType)
+        if (response.data.user.userType == 'Owner') {
+         
+          navigate('/owner-dashboard')
+        } else {
+          navigate('/home')
+        }
       } else {
-        console.error("Login failed");
-        setError("Invalid email or password. Please try again.");
+        console.error('Login failed')
+        setError('Invalid email or password. Please try again.')
       }
     } catch (error) {
-      console.error("An error occurred during login:", error);
-      setError("Invalid email or password.");
+      console.error('An error occurred during login:', error)
+      setError('Invalid email or password.')
     }
-  };
+  }
 
   return (
     <div className="login-container">
@@ -60,7 +70,10 @@ const Login = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block mb-2 text-sm font-medium">
+            <label
+              htmlFor="password"
+              className="block mb-2 text-sm font-medium"
+            >
               Password
             </label>
             <input
@@ -78,7 +91,7 @@ const Login = () => {
             Sign in
           </button>
           <p className="text-sm font-light">
-            Create an Account:{" "}
+            Create an Account:{' '}
             <Link to="/signup" className="login-link">
               Sign up
             </Link>
@@ -86,7 +99,7 @@ const Login = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
