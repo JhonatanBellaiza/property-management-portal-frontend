@@ -1,0 +1,40 @@
+.manage-requests-container {
+    max-width: 800px; /* Adjust the maximum width as needed */
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .manage-requests-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .user-requests-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .user-request-item {
+    display: table-row;
+    margin-bottom: 20px; /* Increase the margin between rows */
+  }
+  
+  .user-request-item > div, .user-request-item > button {
+    display: table-cell;
+    border: 1px solid #ddd;
+    padding: 20px; /* Increase the padding for each cell */
+  }
+  
+  .user-request-item > button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px; /* Add margin to the button for separation */
+  }
+  
+  .user-request-item > button:hover {
+    background-color: #0056b3;
+  }
