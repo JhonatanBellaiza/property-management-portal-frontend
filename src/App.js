@@ -1,16 +1,19 @@
-import './App.css'
-import NavBarComponent from './components/navbar/NavBarComponent'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import FooterComponent from './components/footer/FooterComponent'
-import LoginPage from './pages/LoginPage'
-import axios from 'axios'
-import AuthContext from './AuthContext'
-import { React, useState } from 'react'
-import AddPropertyModal from './AddPropertyModal'
-import RegisterPage from './pages/RegisterPage'
-import AddProperty from './pages/AddProperty'
-import OwnerDashboard from './pages/OwnerDashboard'
+import "./App.css";
+import NavBarComponent from "./components/navbar/NavBarComponent";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FooterComponent from "./components/footer/FooterComponent";
+import LoginPage from "./pages/LoginPage"
+import axios from "axios";
+import AuthContext from "./AuthContext";
+import { React, useState } from "react";
+import AddPropertyModal from "./AddPropertyModal";
+import RegisterPage from "./pages/RegisterPage";
+import AddProperty from "./pages/AddProperty";
+import Dashboard from "./pages/AdminDashboard"
+import ManageRequest from "./pages/ManageRequestPage";
+import OwnerDashboard from "./pages/OwnerDashboard";
+
 
 axios.interceptors.request.use(function (config) {
   // get the request url
@@ -42,22 +45,24 @@ axios.interceptors.response.use(
 function App() {
   return (
     <div>
-      <BrowserRouter>
-        <NavBarComponent />
-        <div>
-          <Routes>
-            {/*  <Route exect path="/" element={<Home />}></Route>
+        <BrowserRouter>
+          <NavBarComponent />
+          <div>
+            <Routes>
+              {/*  <Route exect path="/" element={<Home />}></Route>
               <Route path="/home" element={<Properties />}></Route>  */}
-            <Route path="/add-property" element={<AddProperty />}></Route>
-            <Route path="/signup" element={<RegisterPage />}></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/owner-dashboard" element={<OwnerDashboard />}></Route>
-          </Routes>
-        </div>
-        <FooterComponent />
-      </BrowserRouter>
+              <Route path="/add-property" element={<AddProperty />}></Route>
+              <Route path="/signup" element={<RegisterPage />}></Route>
+              <Route path="/login" element={<LoginPage />}></Route>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/manage-requests" element={<ManageRequest />}></Route>
+              <Route path="/owner-dashboard" element={<OwnerDashboard />}></Route>
+            </Routes>
+          </div>
+          <FooterComponent />
+        </BrowserRouter>
     </div>
   )
 }
 
-export default App
+export default App;

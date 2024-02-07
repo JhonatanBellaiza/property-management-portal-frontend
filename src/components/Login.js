@@ -34,12 +34,19 @@ const Login = () => {
         console.log(token)
         console.log('SUCCESSFUL LOGIN')
         console.log(response.data.user.userType)
-        if (response.data.user.userType == 'Owner') {
-         
-          navigate('/owner-dashboard')
-        } else {
-          navigate('/home')
+
+        switch (response.data.user.userType) {
+          case 'Owner':
+            navigate('/owner-dashboard')
+            break
+          case 'Admin':
+            navigate('/admin-dashboard')
+            break
+          default:
+            navigate('/home')
+            break
         }
+        
       } else {
         console.error('Login failed')
         setError('Invalid email or password. Please try again.')
