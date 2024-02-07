@@ -161,15 +161,6 @@ const NavBarComponent = () => {
             {populateAddProperty()}
           </ul>
 
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </form>
-
           <div class="text-end">
             {populateLogIn()}
             {populateLogOut()}
