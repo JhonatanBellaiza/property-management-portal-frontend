@@ -11,6 +11,8 @@ const NavBarComponent = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     localStorage.removeItem('userType')
+    localStorage.removeItem('userName')
+    localStorage.removeItem('userId')
     window.location.href = '/login'
   }
 
