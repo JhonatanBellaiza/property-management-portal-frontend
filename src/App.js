@@ -7,9 +7,11 @@ import LoginPage from "./pages/LoginPage"
 import axios from "axios";
 import AuthContext from "./AuthContext";
 import { React, useState } from "react";
-import AddPropertyModal from "./AddPropertyModal";
 import RegisterPage from "./pages/RegisterPage";
 import AddProperty from "./pages/AddProperty";
+import AddOffer from "./pages/AddOffer";
+import Home from "./pages/Home";
+import ViewProperty from "./pages/ViewProperty";
 
 
 axios.interceptors.request.use(function (config) {
@@ -60,9 +62,11 @@ function App() {
           <NavBarComponent />
           <div>
             <Routes>
-             {/*  <Route exect path="/" element={<Home />}></Route>
-              <Route path="/home" element={<Properties />}></Route>  */} 
-               <Route path="/add-property" element={<AddProperty />}></Route>
+              <Route exect path="" element={<Home />}></Route>
+              <Route path="/property/:id" element={<ViewProperty />}></Route>
+
+              <Route path="/add-property" element={<AddProperty />}></Route>
+              <Route path="/add-offer" element={<AddOffer />}></Route>
               <Route path="/signup" element={<RegisterPage />}></Route>
               <Route path="/login" element={<LoginPage />}></Route>
             </Routes>

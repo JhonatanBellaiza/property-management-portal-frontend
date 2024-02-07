@@ -23,10 +23,10 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:8080/api/login", loginData);
       if (response.status === 200) {
-        const token = response.data.accessToken;
+        const token = response.data.token;
         localStorage.setItem("token", token);
-        localStorage.setItem("user_id", response.data.user_id);
-        localStorage.setItem("role_id", response.data.role_id);
+        localStorage.setItem("user_id", response.data.user.id);
+        localStorage.setItem("role_id", response.data.user.userType);
         console.log(token)
         //alert.success("Logged in")
         console.log('SUCCESSFUL LOGIN')
@@ -73,9 +73,10 @@ const Login = () => {
           <button
             type="submit"
             className="login-button"
+            onClick={handleSubmit}
           >
             Sign in
-          </button>
+          </button >
           <p className="text-sm font-light">
             Don’t have an account yet?{" "}
             <Link

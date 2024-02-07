@@ -6,15 +6,15 @@ import { useContext } from "react";
 const NavBarComponent = () => {
   const auth = useContext(AuthContext);
 
+  localStorage.getItem("role_id")
   const logout = () => {
-    sessionStorage.removeItem("access_token");
-    sessionStorage.removeItem("refresh_token");
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     window.location.href = "/login";
   };
 
   const isLoggedIn = () => {
-    if (sessionStorage.getItem("access_token")) {
+    if (localStorage.getItem("token")) {
       return true;
     }
   };

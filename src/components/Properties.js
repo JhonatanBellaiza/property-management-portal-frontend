@@ -11,7 +11,7 @@ const Properties = () => {
 
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/property", {
+        const response = await axios.get("http://localhost:8080/api/owner/1/property", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -30,8 +30,7 @@ const Properties = () => {
   return (
     <Layout>
       <div className="ml-2">
-        <h1 className="text-2xl font-bold mb-2">Newest Listings</h1>
-        <p className="text-gray-500">See the most up-to-date listings</p>
+        <h1 className="text-2xl font-bold mb-2">Last Added</h1>
       </div>
       <div className="flex flex-wrap justify-start">
         {properties.map((property) => (
