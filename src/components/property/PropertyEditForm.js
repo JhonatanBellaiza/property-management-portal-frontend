@@ -30,13 +30,19 @@ const PropertyEditForm = ({ property, onSave, onCancel }) => {
       </div>
       <div className="form-group">
         <label>Home Type:</label>
-        <input
-          type="text"
+        <select
           className="form-control"
           name="propertyHomeType"
           value={updatedProperty.propertyHomeType}
           onChange={handleChange}
-        />
+        >
+          <option value="">Select Home Type</option>
+          <option value="Congo">Congo</option>
+          <option value="Duplex">Duplex</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Ranch">Ranch</option>
+          <option value="TownHouse">TownHouse</option>
+        </select>
       </div>
       <div className="form-group">
         <label>Sale Type:</label>
