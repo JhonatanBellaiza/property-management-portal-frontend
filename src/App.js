@@ -10,7 +10,7 @@ import { React, useState } from "react";
 import AddPropertyModal from "./AddPropertyModal";
 import RegisterPage from "./pages/RegisterPage";
 import AddProperty from "./pages/AddProperty";
-import Dashboard from "./pages/AdminDashboard"
+import AdmninDashboard from "./pages/AdminDashboard"
 import ManageRequest from "./pages/ManageRequestPage";
 import OwnerDashboard from "./pages/OwnerDashboard";
 import PropertyPage from "./pages/PropertyPage";
@@ -55,7 +55,7 @@ function App() {
               <Route path="/add-property" element={<AddProperty />}></Route>
               <Route path="/signup" element={<RegisterPage />}></Route>
               <Route path="/login" element={<LoginPage />}></Route>
-              <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/admin-dashboard" element={<AdmninDashboard />}></Route>
               <Route path="/manage-requests" element={<ManageRequest />}></Route>
               <Route path="/owner-dashboard" element={<OwnerDashboard />}></Route>
               <Route path="/property/:id" element={<PropertyPage />}></Route>

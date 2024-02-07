@@ -66,7 +66,7 @@ const ManageRequests = () => {
       ) : (
         <p>You don't have pending requests...</p>
       )}
-      <Link to="/dashboard">Go Back to Dashboard</Link>
+      <Link to="/admin-dashboard">Go Back to Dashboard</Link>
     </div>
   );
 };
