@@ -9,6 +9,7 @@ const NavBarComponent = () => {
   const logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+    localStorage.removeItem('userType')
     window.location.href = '/login'
   }
 
@@ -86,6 +87,7 @@ const NavBarComponent = () => {
   }
 
   const populateAddProperty = () => {
+    console.log(isOwner())
     if (isOwner()) {
       return (
         <Link to={'/add-property'} class="nav-link px-2 text-white">

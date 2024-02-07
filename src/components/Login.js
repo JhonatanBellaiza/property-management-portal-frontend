@@ -37,16 +37,15 @@ const Login = () => {
 
         switch (response.data.user.userType) {
           case 'Owner':
-            navigate('/owner-dashboard')
+            window.location.href = '/owner-dashboard'
             break
           case 'Admin':
-            navigate('/admin-dashboard')
+            window.location.href = '/admin-dashboard'
             break
           default:
             navigate('/home')
             break
         }
-        
       } else {
         console.error('Login failed')
         setError('Invalid email or password. Please try again.')
