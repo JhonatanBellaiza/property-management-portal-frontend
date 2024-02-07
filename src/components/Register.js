@@ -74,7 +74,7 @@ const Register = () => {
           firstName: firstName,
           lastName: lastName,
           status: 0,
-          isSend: false,
+          active: true,
           userType: userType,
         });
 
