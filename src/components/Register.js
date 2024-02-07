@@ -25,12 +25,13 @@ const InputField = ({ label, type, name, placeholder, required, value, onChange,
 );
 
 const Register = () => {
-  const [userType, setUserType] = useState("user");
+  //const [userType, setUserType] = useState("user");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
+    userType: "",
   });
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
@@ -65,22 +66,21 @@ const Register = () => {
 
     if (validateForm()) {
       try {
-        const { email, password, firstName, lastName } = formData;
-
-        const roleId = userType === "owner" ? 2 : 3;
+        const { email, password, firstName, lastName, userType } = formData;
 
         const response = await axios.post(API_URL, {
-          email,
-          password,
-          firstname: firstName,
-          lastname: lastName,
+          email: email,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
           status: 0,
           isSend: false,
-          role: { id: roleId },
+          userType: userType,
         });
 
         if (response.status === 200) {
           console.log('SUCCESSFUL REGISTERED')
+          console.log(response);
           navigate('/login');
         }
       } catch (error) {
@@ -146,11 +146,11 @@ const Register = () => {
               id="userType"
               name="userType"
               className="input-field"
-              onChange={(e) => setUserType(e.target.value)}
-              value={userType}
+              onChange={handleInputChange}
+              value={formData.userType}
             >
-              <option value="user">User</option>
-              <option value="owner">Owner</option>
+              <option value="Customer" >Customer</option>
+              <option value="Owner">Owner</option>
             </select>
           </div>
 

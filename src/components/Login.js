@@ -23,10 +23,10 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:8080/api/login", loginData);
       if (response.status === 200) {
-        const token = response.data.accessToken;
+        const token = response.data.token;
         localStorage.setItem("token", token);
-        localStorage.setItem("user_id", response.data.user_id);
-        localStorage.setItem("role_id", response.data.role_id);
+        localStorage.setItem("id", response.data.user.id);
+        localStorage.setItem("userType", response.data.user.userType);
         console.log(token);
         console.log("SUCCESSFUL LOGIN");
         navigate("/home");
