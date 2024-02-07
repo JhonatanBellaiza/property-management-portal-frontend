@@ -75,24 +75,29 @@ const PropertyForm = ({ onSubmit }) => {
           />
         </div>
         <div className="form-group py-2">
-          <input
-            type="text"
+          <select
             className="form-control"
             name="propertySaleType"
             value={formData.propertySaleType}
             onChange={handleChange}
-            placeholder="Sale Type"
-          />
+          >
+            <option value="">Select Sale Type</option>
+            <option value="Rent">Rent</option>
+            <option value="Sale">Sale</option>
+          </select>
         </div>
         <div className="form-group py-2">
-          <input
-            type="text"
+          <select
             className="form-control"
             name="propertyStatus"
             value={formData.propertyStatus}
             onChange={handleChange}
-            placeholder="Status"
-          />
+          >
+            <option value="">Select Status</option>
+            <option value="Available">Available</option>
+            <option value="Pending">Pending</option>
+            <option value="Contingent">Contingent</option>
+          </select>
         </div>
         <div className="text-center">
           <button type="submit" className="btn btn-primary">
