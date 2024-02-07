@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import AuthContext from '../../AuthContext'
 import { useContext } from 'react'
-import { useEffect } from 'react'
 
 const NavBarComponent = () => {
   const auth = useContext(AuthContext)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const logout = () => {
     localStorage.removeItem('token')
@@ -14,16 +12,17 @@ const NavBarComponent = () => {
     window.location.href = '/login'
   }
 
-  useEffect(() => {
+  const isLoggedIn = () => {
+    // Check if the token exists in local storage
     if (localStorage.getItem('token')) {
-      setIsLoggedIn(true)
+      return true // Return true if token exists
     } else {
-      setIsLoggedIn(false)
+      return false // Return false if token doesn't exist
     }
-  }, [isLoggedIn])
+  }
 
   const populateLogOut = () => {
-    if (isLoggedIn) {
+    if (isLoggedIn()) {
       return (
         <Link onClick={logout} type="button" class="btn btn-outline-light me-2">
           Logout
@@ -33,7 +32,7 @@ const NavBarComponent = () => {
   }
 
   const populateLogIn = () => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn()) {
       return (
         <Link to={'/login'} type="button" class="btn btn-outline-light me-2">
           Login
@@ -43,7 +42,7 @@ const NavBarComponent = () => {
   }
 
   const populateSignUp = () => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn()) {
       return (
         <Link to={'/signup'} type="button" class="btn btn-warning">
           Sign-up

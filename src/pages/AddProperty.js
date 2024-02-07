@@ -17,9 +17,13 @@ const AddProperty = () => {
   }
 
   return (
-    <div>
-      <h1>Add Property Page</h1>
-      <PropertyForm onSubmit={handleSubmit} />
+    <div className="container">
+      <div className="row justify-content-center mt-5">
+        <div className="col-md-6">
+          <h1 className="text-center mb-4">Add Property Page</h1>
+          <PropertyForm onSubmit={handleSubmit} />
+        </div>
+      </div>
     </div>
   )
 }
