@@ -90,9 +90,17 @@ const NavBarComponent = () => {
     console.log(isOwner())
     if (isOwner()) {
       return (
-        <Link to={'/add-property'} class="nav-link px-2 text-white">
-          Add property
-        </Link>
+        <>
+          <Link to={'/add-property'} className="nav-link px-2 text-white">
+            Add Property
+          </Link>
+          <Link to={'/owner-offer-history'} className="nav-link px-2 text-white">
+            Offer History
+          </Link>
+          <Link to={'/owner-live-offers'} className="nav-link px-2 text-white">
+            Live Offers
+          </Link>
+        </>
       )
     }
   }

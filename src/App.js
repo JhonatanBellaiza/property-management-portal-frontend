@@ -14,6 +14,9 @@ import AdmninDashboard from "./pages/AdminDashboard"
 import ManageRequest from "./pages/ManageRequestPage";
 import OwnerDashboard from "./pages/OwnerDashboard";
 import PropertyPage from "./pages/PropertyPage";
+import OfferPage from "./pages/OfferHistoryPage";
+import LiveOfferPage from "./pages/LiveOfferPage";
+import OfferHistoryPage from "./pages/OfferHistoryPage";
 
 
 axios.interceptors.request.use(function (config) {
@@ -59,6 +62,8 @@ function App() {
               <Route path="/manage-requests" element={<ManageRequest />}></Route>
               <Route path="/owner-dashboard" element={<OwnerDashboard />}></Route>
               <Route path="/property/:id" element={<PropertyPage />}></Route>
+              <Route path="/owner-offer-history" element={<OfferHistoryPage />}></Route>
+              <Route path="/owner-live-offers" element={<LiveOfferPage />}></Route>
             </Routes>
           </div>
           <FooterComponent />
