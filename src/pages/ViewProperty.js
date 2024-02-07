@@ -7,6 +7,17 @@ import "./viewProperty.css";
 function ViewProperty() {
   const { id } = useParams();
   const [property, setProperty] = useState();
+  const [isFavorite, setIsFavorite] = useState(false); 
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    axios
+    .get(`http://localhost:8080/api/customer/${localStorage.getItem("userId")}/property/${id}/addFavorite`)
+    .then((res) => {
+    //   setProperty(res.data);
+    }).catch(error => {
+        console.error('Error:', error);
+    });
+  };
 
   useEffect(() => {
     axios
@@ -15,6 +26,17 @@ function ViewProperty() {
         setProperty(res.data);
       });
   }, []);
+  const cardStyle = {
+    position: 'relative',
+  };
+
+  const favoriteIconStyle = {
+    position: 'absolute',
+    bottom: '10px', // Adjust this value as needed to fit your design
+    right: '10px', // Adjust this value as needed to fit your design
+    cursor: 'pointer', // Changes the cursor to indicate the icon is clickable
+    fontSize: '24px', // Adjust the size of the heart icon
+  };
 
   return (
     <div className="property--card">
@@ -59,8 +81,13 @@ function ViewProperty() {
                 {" "}
                 <strong>Photos:</strong>
               </div>
-              <div class="text-center"> {homePic}</div>
+              <div class="text-center"> 
+                <img src={property.imgUrl}></img>
+              </div>
             </div>
+            <button onClick={toggleFavorite} style={favoriteIconStyle}>
+              {isFavorite ? '❤️' : '🖤'}
+            </button>
             <div className="text-center mt-5">
               <Link
                 to={"/"}

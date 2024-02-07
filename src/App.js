@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FooterComponent from "./components/footer/FooterComponent";
 import LoginPage from "./pages/LoginPage"
 import axios from "axios";
-import AuthContext from "./AuthContext";
 import { React, useState } from "react";
 import RegisterPage from "./pages/RegisterPage";
 import AddProperty from "./pages/AddProperty";
@@ -16,6 +15,7 @@ import PropertyPage from "./pages/PropertyPage";
 import AddOffer from "./pages/AddOffer";
 import Home from "./pages/Home";
 import ViewProperty from "./pages/ViewProperty";
+import Favorite from "./pages/favorite";
 
 
 axios.interceptors.request.use(function (config) {
@@ -62,7 +62,11 @@ function App() {
               <Route path="/admin-dashboard" element={<AdmninDashboard />}></Route>
               <Route path="/manage-requests" element={<ManageRequest />}></Route>
               <Route path="/owner-dashboard" element={<OwnerDashboard />}></Route>
-              <Route path="/property/:id" element={<PropertyPage />}></Route>
+              {/* <Route path="/property/:id" element={<PropertyPage />}></Route> */}
+
+
+              <Route path="/home" element={<Home />}></Route>
+              <Route path="/favorite" element={<Favorite />}></Route>
             </Routes>
           </div>
           <FooterComponent />

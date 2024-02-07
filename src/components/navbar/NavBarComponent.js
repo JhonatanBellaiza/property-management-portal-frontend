@@ -79,8 +79,11 @@ const NavBarComponent = () => {
   }
   const hasRoleCustomer = () => {
     try {
-      if (auth.user.realm_access.roles.includes('Customer')) {
+      if (localStorage.getItem("userType"
+      ) == "Customer") {
         return true
+      } else { 
+        return false
       }
     } catch (error) {
       return false
