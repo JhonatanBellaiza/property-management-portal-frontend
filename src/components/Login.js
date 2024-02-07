@@ -43,7 +43,7 @@ const Login = () => {
             window.location.href = '/admin-dashboard'
             break
           default:
-            navigate('/home')
+            window.location.href = '/home'
             break
         }
       } else {
@@ -95,7 +95,7 @@ const Login = () => {
           {error && <p className="text-red-500">{error}</p>}
           <button type="submit" className="login-button">
             Sign in
-          </button>
+          </button >
           <p className="text-sm font-light">
             Create an Account:{' '}
             <Link to="/signup" className="login-link">

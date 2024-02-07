@@ -6,10 +6,13 @@ import { useContext } from 'react'
 const NavBarComponent = () => {
   const auth = useContext(AuthContext)
 
+  localStorage.getItem("role_id")
   const logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     localStorage.removeItem('userType')
+    localStorage.removeItem('userName')
+    localStorage.removeItem('userId')
     window.location.href = '/login'
   }
 
@@ -78,8 +81,11 @@ const NavBarComponent = () => {
   }
   const hasRoleCustomer = () => {
     try {
-      if (auth.user.realm_access.roles.includes('Customer')) {
+      if (localStorage.getItem("userType"
+      ) == "Customer") {
         return true
+      } else { 
+        return false
       }
     } catch (error) {
       return false
@@ -168,15 +174,6 @@ const NavBarComponent = () => {
             {populatUserManagement()}
             {populateAddProperty()}
           </ul>
-
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </form>
 
           <div class="text-end">
             {populateLogIn()}
