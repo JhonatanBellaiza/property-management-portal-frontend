@@ -1,7 +1,7 @@
 // PropertyService.js
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:8080/api'; // Replace "{{URL}}/property" with your actual API URL
+const baseUrl = 'http://localhost:8080/api';
 
 const userId = localStorage.getItem('userId');
 
@@ -13,6 +13,27 @@ const getAllProperties = () => {
     .catch((error) => {
       console.error('Error fetching properties:', error);
       throw new Error('Failed to fetch properties');
+    });
+};
+
+const getPropertyById = (id) => {
+  return axios.get(`${baseUrl}/property/${id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error('Error fetching property:', error);
+      throw new Error('Failed to fetch properties');
+    });
+};
+
+const deleteProperty = (id) => {
+  return axios.delete(`${baseUrl}/property/${id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error('Error deleting property:', error);
     });
 };
 
@@ -31,7 +52,25 @@ const addProperty = (property) => {
     });
 };
 
+const updateProperty = (id, updatedProperty) => {
+  return axios.put(`${baseUrl}/property/${id}`, updatedProperty, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error('Error updating property:', error);
+
+    });
+};
+
 export default {
   getAllProperties,
   addProperty,
+  getPropertyById,
+  deleteProperty,
+  updateProperty
 };

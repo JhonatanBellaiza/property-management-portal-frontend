@@ -13,6 +13,7 @@ import AddProperty from "./pages/AddProperty";
 import Dashboard from "./pages/AdminDashboard"
 import ManageRequest from "./pages/ManageRequestPage";
 import OwnerDashboard from "./pages/OwnerDashboard";
+import PropertyPage from "./pages/PropertyPage";
 
 
 axios.interceptors.request.use(function (config) {
@@ -57,6 +58,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}></Route>
               <Route path="/manage-requests" element={<ManageRequest />}></Route>
               <Route path="/owner-dashboard" element={<OwnerDashboard />}></Route>
+              <Route path="/property/:id" element={<PropertyPage />}></Route>
             </Routes>
           </div>
           <FooterComponent />
