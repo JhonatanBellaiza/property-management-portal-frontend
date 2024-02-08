@@ -66,6 +66,13 @@ function App() {
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/home" element={<Home />}></Route>
 
+            {(userType === 'Owner' || userType === 'Customer') && (
+              <>
+                <Route path="/propertyHome/:id" element={<ViewProperty />}></Route>
+                <Route path="/property/:id" element={<PropertyPage />}></Route>
+              </>
+            )}
+
             {/* Private Routes */}
             {userType === 'Admin' && (
               <>
@@ -87,8 +94,6 @@ function App() {
               <Route path="/customer-offer-history" element={<CustomerHistoryOffers />}></Route>
               <Route path="/customer-offer-live" element={<CustomerLiveOffers />}></Route>
               <Route path="/favorite" element={<Favorite />}></Route>
-              <Route path="/property/:id" element={<ViewProperty />}></Route>
-              <Route path="/property/:id" element={<PropertyPage />}></Route>
               </>
             )}
             {/* Catch-all route */}

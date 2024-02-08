@@ -67,7 +67,7 @@ const Favorite = () => {
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
                         <Link
-                          to={`/property/${data.id}`}
+                          to={`/propertyHome/${data.id}`}
                           type="button"
                           class="btn btn-sm btn-secondary"
                         >

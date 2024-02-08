@@ -15,11 +15,11 @@ const Property = ({ property }) => {
     <div className="flex flex-wrap -mx-2">
       <div className="w-full sm:w-1/2 md:w-1/3 px-2 my-4">
         <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <Link to={`/property/${property.id}`}>
+          <Link to={`/propertyHome/${property.id}`}>
             <img className="rounded-t-lg" style={imageStyle} src={property.imgUrl} alt="Property" />
           </Link>
           <div className="p-5">
-            <Link to={`/property/${property.id}`}>
+            <Link to={`/propertyHome/${property.id}`}>
               <h3 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                 Location: {property.location}
               </h3>
@@ -33,7 +33,7 @@ const Property = ({ property }) => {
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
               For: {property.propertySaleType}
             </p>
-            <button type="button" class="btn btn-primary btn-lg" onClick={() => navigate(`/property/${property.id}`)}>Detail</button>
+            <button type="button" class="btn btn-primary btn-lg" onClick={() => navigate(`/propertyHome/${property.id}`)}>Detail</button>
           </div>
         </div>
       </div>
