@@ -37,9 +37,10 @@ axios.interceptors.response.use(
     return response
   },
   function (err) {
-    if (err.response && (err.response.status === 401 || err.response.status === 403)) {
-      console.log('Unauthorized')
-      window.location.href = '/login'
+    console.log(err.response.status + "THIS IS THE RESPONSE STATUS WHEN ERROR")
+    if (err.response && (err.response.status === 401 || err.response.status === 403 )) {
+      console.log('Unauthorized');
+      window.location.href = '/login';
     }
     return Promise.reject(err)
   }
@@ -80,7 +81,8 @@ function App() {
             )}
 
             {/* Catch-all route */}
-            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to="/" />} />
+
           </Routes>
         </div>
         <FooterComponent />
