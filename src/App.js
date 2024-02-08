@@ -39,7 +39,6 @@ axios.interceptors.response.use(
     return response
   },
   function (err) {
-    console.log(err.response.status + "THIS IS THE RESPONSE STATUS WHEN ERROR")
     if (err.response && (err.response.status === 401 || err.response.status === 403 )) {
       console.log('Unauthorized');
       window.location.href = '/login';

@@ -25,6 +25,8 @@ const InputField = ({ label, type, name, placeholder, required, value, onChange,
 );
 
 const Register = () => {
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -66,22 +68,32 @@ const Register = () => {
     if (validateForm()) {
       const { email, password, firstName, lastName, userType } = formData;
 
-      const response = await axios.post(API_URL, {
-        email: email,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-        active: true,
-        userType: userType,
-      }).then((response) => {
-        navigate('/login');
-      }).catch((error) => {
-        console.error("Registration failed. Please try again.", error);
-      });
+      try {
+        const response = await axios.post(API_URL, {
+          email: email,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          active: true,
+          userType: userType,
+        });
 
+        // Display success message and redirect to login after a short delay
+        setShowSuccessMessage(true);
+        setTimeout(() => {
+          setShowSuccessMessage(false);
+          navigate('/login');
+        }, 3000); // Adjust the delay time as needed
+      } catch (error) {
+        if (error.response && error.response.data && error.response.data.errorMessage) {
+          // Display the specific error message from the backend
+          setShowErrorMessage(error.response.data.errorMessage);
+        } else {
+          console.error("Registration failed. Please try again.", error);
+        }
+      }
     }
   };
-
   return (
     <div className="register-container">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -150,6 +162,16 @@ const Register = () => {
           <button type="submit" className="register-button">
             Create Account
           </button>
+          {showSuccessMessage && (
+            <div className="success-message">
+              Registration successful! Redirecting to login page...
+            </div>
+          )}
+          {showErrorMessage && (
+            <div className="error-message">
+              {showErrorMessage}
+            </div>
+          )}
         </form>
       </div>
     </div>
