@@ -58,10 +58,10 @@ const Favorite = () => {
                       <img  style={imageStyle} src={data.imgUrl}/>
                     </div>
                     <div>
-                      {data.numberOfRooms} Bedrooms | sqft- 400
+                      {data.numberOfRooms} Bedrooms
                     </div>
                     <p class="card-text">
-                    Price :  $1000
+                    {data.propertySaleType + ", " + data.propertyStatus}
                     </p>
 
                     <div class="d-flex justify-content-between align-items-center">
@@ -69,7 +69,7 @@ const Favorite = () => {
                         <Link
                           to={`/property/${data.id}`}
                           type="button"
-                          class="btn btn-sm btn-outline-secondary"
+                          class="btn btn-sm btn-secondary"
                         >
                           View
                         </Link>
@@ -77,7 +77,7 @@ const Favorite = () => {
                         <Link
                           onClick={() => DeleteFavorite(data.id)}
                           type="button"
-                          class="btn btn-sm btn-outline-secondary"
+                          class="btn btn-sm btn-danger"
                         >
                           Remove favorite
                         </Link>
