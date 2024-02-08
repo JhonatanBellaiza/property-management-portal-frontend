@@ -11,11 +11,7 @@ const Properties = () => {
 
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/owner/1/property", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get("http://localhost:8080/api/property");
         if(response.status === 200) {
           setProperties(response.data);
         }

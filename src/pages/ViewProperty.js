@@ -24,7 +24,9 @@ function ViewProperty() {
       .get(`http://localhost:8080/api/property/${id}`)
       .then((res) => {
         setProperty(res.data);
-      });
+      }).catch(error => {
+        console.error('Error:', error);
+    });
   }, []);
   const cardStyle = {
     position: 'relative',

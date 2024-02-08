@@ -7,7 +7,10 @@ const Favorite = () => {
 
   function loadFavorite() {
     axios.get(`http://localhost:8080/api/customer/${localStorage.getItem("userId")}/favoriteList`).then((res) => {
-      setFavoriteList(res.data.propertyList);
+      if(res.data.propertyList != null)
+        setFavoriteList(res.data.propertyList);
+      else
+        setFavoriteList([])
     });
   }
 
