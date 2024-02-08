@@ -84,11 +84,29 @@ const NavBarComponent = () => {
     }
   }
 
+  const populateHome = () => {
+    const utype = localStorage.getItem("userType");
+    if((utype == null || !utype) || utype == 'Customer') {
+      return (
+        <>
+            <li>
+              <Link to={'/home'} class="nav-link px-2 text-white">
+                Home
+              </Link>
+            </li>
+        </>
+      )
+    }
+  }
+
   const populateAddProperty = () => {
     console.log(isOwner())
     if (isOwner()) {
       return (
         <>
+          <Link to={'/owner-dashboard'} className="nav-link px-2 text-white">
+            Owner Dashboard
+          </Link>
           <Link to={'/add-property'} className="nav-link px-2 text-white">
             Add Property
           </Link>
@@ -108,11 +126,11 @@ const NavBarComponent = () => {
     if (localStorage.getItem("userType") == 'Admin') {
       return (
         <>
-          <Link to={'/manage-requests'} className="nav-link px-2 text-white">
-            Manage Requests
-          </Link>
           <Link to={'/admin-dashboard'} className="nav-link px-2 text-white">
             Dashboard
+          </Link>
+          <Link to={'/manage-requests'} className="nav-link px-2 text-white">
+            Manage Requests
           </Link>
         </>
       )
@@ -175,11 +193,7 @@ const NavBarComponent = () => {
           </Link>
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li>
-              <Link to={'/home'} class="nav-link px-2 text-white">
-                Home
-              </Link>
-            </li>
+            {populateHome()}
             {populateOffers()}
             {populateFavorite()}
             {populatUserManagement()}

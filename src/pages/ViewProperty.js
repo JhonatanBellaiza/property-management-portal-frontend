@@ -135,12 +135,13 @@ function ViewProperty() {
   
                 Back To Home
               </Link>
-              <button className="btn btn-primary" onClick={handleAddOffer}>
+              {localStorage.getItem('userType') == "Admin" || localStorage.getItem('userType') == "Owner" ?      "" :                  (<button className="btn btn-primary" onClick={handleAddOffer}>
              Add New Offer
-           </button>
-           <button onClick={toggleFavorite} className="btn btn-danger" >
+           </button>)}
+
+            {localStorage.getItem('userType') == "Admin" || localStorage.getItem('userType') == "Owner" ? " ":(           <button onClick={toggleFavorite} className="btn btn-danger" >
               add To Favorite
-            </button>
+            </button>)}
             </div>
             {addOfferSelected ? (                <div className="relative bg-white rounded-lg shadow max-h-500">
                     <div className="flex items-start justify-center p-4 border-b rounded-t">

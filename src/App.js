@@ -65,13 +65,8 @@ function App() {
             <Route path="/signup" element={<RegisterPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/home" element={<Home />}></Route>
+            <Route path="/propertyHome/:id" element={<ViewProperty />}></Route>
 
-            {(userType === 'Owner' || userType === 'Customer') && (
-              <>
-                <Route path="/propertyHome/:id" element={<ViewProperty />}></Route>
-                <Route path="/property/:id" element={<PropertyPage />}></Route>
-              </>
-            )}
 
             {/* Private Routes */}
             {userType === 'Admin' && (
@@ -87,6 +82,7 @@ function App() {
                 <Route path="/owner-dashboard" element={<OwnerDashboard />} />
                 <Route path="/owner-offer-history" element={<OfferHistoryPage />}></Route>
                 <Route path="/owner-live-offers" element={<LiveOfferPage />}></Route>
+                <Route path="/property/:id" element={<PropertyPage />}></Route>
               </>
             )}
             {userType === 'Customer' && (
