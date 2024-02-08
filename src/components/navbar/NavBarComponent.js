@@ -131,6 +131,27 @@ const NavBarComponent = () => {
     }
     return favorite
   }
+  const populateOffers = () => {
+    let offers = ''
+    if (hasRoleCustomer()) {
+      offers = (
+        <>
+                <li>
+        <Link to={'/customer-offer-history'} class="nav-link px-2 text-white">
+          Offers History
+        </Link>
+      </li>
+        <li>
+              <Link to={'/customer-offer-live'} class="nav-link px-2 text-white">
+                Live Offers
+              </Link>
+          </li>
+        </>
+      )
+    }
+    return offers
+  }
+ 
 
   return (
     <header class="text-bg-primary p-3">
@@ -159,7 +180,7 @@ const NavBarComponent = () => {
                 Home
               </Link>
             </li>
-            
+            {populateOffers()}
             {populateFavorite()}
             {populatUserManagement()}
             {populateAddProperty()}
