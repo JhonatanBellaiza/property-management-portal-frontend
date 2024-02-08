@@ -1,7 +1,7 @@
 import "./App.css";
 import NavBarComponent from "./components/navbar/NavBarComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import FooterComponent from "./components/footer/FooterComponent";
 import LoginPage from "./pages/LoginPage"
 import axios from "axios";
@@ -37,43 +37,56 @@ axios.interceptors.response.use(
     return response
   },
   function (err) {
-    if (err.response && (err.response.status === 401 || err.response.status === 403)) {
-      console.log('Unauthorized')
-      window.location.href = '/login'
+    console.log(err.response.status + "THIS IS THE RESPONSE STATUS WHEN ERROR")
+    if (err.response && (err.response.status === 401 || err.response.status === 403 )) {
+      console.log('Unauthorized');
+      window.location.href = '/login';
     }
     return Promise.reject(err)
   }
 )
 
 function App() {
+  const userType = localStorage.getItem('userType');
   return (
     <div>
-        <BrowserRouter>
-          <NavBarComponent />
-          <div>
-            <Routes>
-              <Route exect path="" element={<Home />}></Route>
-              <Route path="/property/:id" element={<ViewProperty />}></Route>
+      <BrowserRouter>
+        <NavBarComponent />
+        <div>
+          <Routes>
+            {/* Public Routes */}
+            <Route exect path="" element={<Home />}></Route>
+            <Route path="/signup" element={<RegisterPage />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/property/:id" element={<ViewProperty />}></Route>
+            <Route path="/property/:id" element={<PropertyPage />}></Route>
+            <Route path="/home" element={<Home />}></Route>
+            <Route path="/favorite" element={<Favorite />}></Route>
 
-              <Route path="/add-property" element={<AddProperty />}></Route>
-              <Route path="/add-offer" element={<AddOffer />}></Route>
-              <Route path="/signup" element={<RegisterPage />}></Route>
-              <Route path="/login" element={<LoginPage />}></Route>
-              <Route path="/admin-dashboard" element={<AdmninDashboard />}></Route>
-              <Route path="/manage-requests" element={<ManageRequest />}></Route>
-              <Route path="/owner-dashboard" element={<OwnerDashboard />}></Route>
-              <Route path="/property/:id" element={<PropertyPage />}></Route>
-              <Route path="/owner-offer-history" element={<OfferHistoryPage />}></Route>
-              <Route path="/owner-live-offers" element={<LiveOfferPage />}></Route>
-              {/* <Route path="/property/:id" element={<PropertyPage />}></Route> */}
+            {/* Private Routes */}
+            {userType === 'Admin' && (
+              <>
+                <Route path="/admin-dashboard" element={<AdmninDashboard />}></Route>
+                <Route path="/manage-requests" element={<ManageRequest />}></Route>
+              </>
+            )}
+            {userType === 'Owner' && (
+              <>
+                <Route path="/add-property" element={<AddProperty />} />
+                <Route path="/add-offer" element={<AddOffer />} />
+                <Route path="/owner-dashboard" element={<OwnerDashboard />} />
+                <Route path="/owner-offer-history" element={<OfferHistoryPage />}></Route>
+                <Route path="/owner-live-offers" element={<LiveOfferPage />}></Route>
+              </>
+            )}
 
+            {/* Catch-all route */}
+            <Route path="*" element={<Navigate to="/" />} />
 
-              <Route path="/home" element={<Home />}></Route>
-              <Route path="/favorite" element={<Favorite />}></Route>
-            </Routes>
-          </div>
-          <FooterComponent />
-        </BrowserRouter>
+          </Routes>
+        </div>
+        <FooterComponent />
+      </BrowserRouter>
     </div>
   )
 }
