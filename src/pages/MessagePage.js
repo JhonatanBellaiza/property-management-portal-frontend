@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios' // Make sure axios is installed in your project
 import { useLocation, useParams } from 'react-router-dom'
-import './OwnerMessagePage.css' // Import your CSS file
+import './MessagePage.css' // Import your CSS file
 
-function OwnerMessagePage() {
+function MessagePage() {
   const [messages, setMessages] = useState([])
   const [content, setContent] = useState('')
   const [sendMessageError, setSendMessageError] = useState(null)
@@ -104,4 +104,4 @@ function OwnerMessagePage() {
   )
 }
 
-export default OwnerMessagePage
+export default MessagePage
