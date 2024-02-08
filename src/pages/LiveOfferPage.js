@@ -70,7 +70,7 @@ function LiveOfferPage() {
                   Date: {new Date(offer.localDateTime).toLocaleDateString()}
                 </p>
                 <Link
-                  to={`/messages?from=${offer.offerFrom.id}&to=${offer.offerTo.id}`}
+                  to={`/messages?from=${offer.offerTo.id}&to=${offer.offerFrom.id}`}
                   className="btn btn-outline-primary mr-2"
                 >
                   View Message

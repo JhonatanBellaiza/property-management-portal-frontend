@@ -34,6 +34,7 @@ function MessagePage() {
   }, [])
 
   const handleSubmit = () => {
+    if(content == '') return
     axios
       .post('http://localhost:8080/api/message/sendMessage', {
         content: content,
