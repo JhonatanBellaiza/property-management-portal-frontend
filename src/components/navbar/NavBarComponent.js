@@ -61,16 +61,16 @@ const NavBarComponent = () => {
     return userType == 'Owner' ? true : false
   }
 
- 
-  const hasRoleAdmin = () => {
+  const hasRoleOwner = () => {
     try {
-      if (auth.user.realm_access.roles.includes('Admin')) {
+      if (auth.user.realm_access.roles.includes('Owner')) {
         return true
       }
     } catch (error) {
       return false
     }
   }
+
   const hasRoleCustomer = () => {
     try {
       if (localStorage.getItem("userType"
@@ -105,16 +105,18 @@ const NavBarComponent = () => {
 
   const populatUserManagement = () => {
     let userManagement = ''
-    if (hasRoleAdmin()) {
-      userManagement = (
-        <li>
-          <Link to={'/users'} class="nav-link px-2 text-white">
-            User Management
+    if (localStorage.getItem("userType") == 'Admin') {
+      return (
+        <>
+          <Link to={'/manage-requests'} className="nav-link px-2 text-white">
+            Manage Requests
           </Link>
-        </li>
+          <Link to={'/admin-dashboard'} className="nav-link px-2 text-white">
+            Dashboard
+          </Link>
+        </>
       )
     }
-    return userManagement
   }
   const populateFavorite = () => {
     let favorite = ''
@@ -176,11 +178,6 @@ const NavBarComponent = () => {
             <li>
               <Link to={'/home'} class="nav-link px-2 text-white">
                 Home
-              </Link>
-            </li>
-            <li>
-              <Link to={'/Chart'} class="nav-link px-2 text-white">
-                About
               </Link>
             </li>
             {populateOffers()}
