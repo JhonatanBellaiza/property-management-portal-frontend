@@ -11,6 +11,8 @@ const NavBarComponent = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     localStorage.removeItem('userType')
+    localStorage.removeItem('userName')
+    localStorage.removeItem('userId')
     window.location.href = '/login'
   }
 
@@ -94,9 +96,17 @@ const NavBarComponent = () => {
     console.log(isOwner())
     if (isOwner()) {
       return (
-        <Link to={'/add-property'} class="nav-link px-2 text-white">
-          Add property
-        </Link>
+        <>
+          <Link to={'/add-property'} className="nav-link px-2 text-white">
+            Add Property
+          </Link>
+          <Link to={'/owner-offer-history'} className="nav-link px-2 text-white">
+            Offer History
+          </Link>
+          <Link to={'/owner-live-offers'} className="nav-link px-2 text-white">
+            Live Offers
+          </Link>
+        </>
       )
     }
   }
@@ -164,15 +174,6 @@ const NavBarComponent = () => {
             {populatUserManagement()}
             {populateAddProperty()}
           </ul>
-
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </form>
 
           <div class="text-end">
             {populateLogIn()}
