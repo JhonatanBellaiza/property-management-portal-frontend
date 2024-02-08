@@ -150,3 +150,8 @@
   color: #888; /* Subtle color for the date text */
   font-size: smaller; /* Adjust the font size as needed */
 }
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

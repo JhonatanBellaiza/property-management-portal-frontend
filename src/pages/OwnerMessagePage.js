@@ -67,7 +67,9 @@ function OwnerMessagePage() {
 
   return (
     <div className="chat-container">
-      <h1>Messages</h1>
+      <div className="center-container">
+        <h5>Messages</h5>
+      </div>
       <div className="chat-messages">
         {messages.map((message) => (
           <div
