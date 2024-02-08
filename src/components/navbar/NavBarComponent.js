@@ -133,11 +133,18 @@ const NavBarComponent = () => {
     let offers = ''
     if (hasRoleCustomer()) {
       offers = (
+        <>
+                <li>
+        <Link to={'/customer-offer-history'} class="nav-link px-2 text-white">
+          Offers History
+        </Link>
+      </li>
         <li>
-          <Link to={'/offers'} class="nav-link px-2 text-white">
-            Offers
-          </Link>
-        </li>
+              <Link to={'/customer-offer-live'} class="nav-link px-2 text-white">
+                Live Offers
+              </Link>
+          </li>
+        </>
       )
     }
     return offers

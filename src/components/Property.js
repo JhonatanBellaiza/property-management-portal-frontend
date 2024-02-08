@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 const Property = ({ property }) => {
- 
+  const navigate = useNavigate(); 
 
   const imageStyle = {
     objectFit: 'cover',
@@ -33,13 +33,7 @@ const Property = ({ property }) => {
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
               For: {property.propertySaleType}
             </p>
-            
-            <Link
-              to={`/property/${property.id}`}
-              className="bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-4 inline-block"
-            >
-              View
-            </Link>
+            <button type="button" class="btn btn-primary btn-lg" onClick={() => navigate(`/property/${property.id}`)}>Detail</button>
           </div>
         </div>
       </div>

@@ -19,6 +19,8 @@ import AddOffer from "./pages/AddOffer";
 import Home from "./pages/Home";
 import ViewProperty from "./pages/ViewProperty";
 import Favorite from "./pages/favorite";
+import CustomerHistoryOffers from "./pages/CustomerHistoryOffers";
+import CustomerLiveOffers from "./pages/CustomerLiveOffers";
 
 
 axios.interceptors.request.use(function (config) {
@@ -40,6 +42,10 @@ axios.interceptors.response.use(
     if (err.response && (err.response.status === 401 || err.response.status === 403)) {
       console.log('Unauthorized')
       window.location.href = '/login'
+    }
+
+    if(err.response.status == 400) {
+      alert(err.response.data.errorMessage)
     }
     return Promise.reject(err)
   }
@@ -64,7 +70,9 @@ function App() {
               <Route path="/property/:id" element={<PropertyPage />}></Route>
               <Route path="/owner-offer-history" element={<OfferHistoryPage />}></Route>
               <Route path="/owner-live-offers" element={<LiveOfferPage />}></Route>
-              <Route path="/offers" element={<OfferHistoryPage />}></Route>
+              <Route path="/customer-offer-history" element={<CustomerHistoryOffers />}></Route>
+              <Route path="/customer-offer-live" element={<CustomerLiveOffers />}></Route>
+
               <Route path="/home" element={<Home />}></Route>
               <Route path="/favorite" element={<Favorite />}></Route>
             </Routes>

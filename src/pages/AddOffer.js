@@ -1,7 +1,11 @@
 import React from "react";
 import "./Add-prop.css"
 
-const AddOffer = (/* { isOpen, onClose, onSubmit, propertyData, handlePropertyChange, handleAddressChange } */) => {
+
+
+
+
+const AddOffer = () => {
     return (
         <div className="add-property">
             <div className="relative w-full max-w-2xl">
