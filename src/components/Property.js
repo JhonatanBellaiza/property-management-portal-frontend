@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import homePic from "../homepic.jpg";
 
 const Property = ({ property }) => {
  
@@ -11,15 +10,13 @@ const Property = ({ property }) => {
     borderRadius: '0.5rem 0.5rem 0 0',
   };
 
-  // Additional styles for positioning the favorite icon
-  
 
   return (
     <div className="flex flex-wrap -mx-2">
       <div className="w-full sm:w-1/2 md:w-1/3 px-2 my-4">
         <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <Link to={`/property/${property.id}`}>
-            <img className="rounded-t-lg" style={imageStyle} src={homePic} alt="Property" />
+            <img className="rounded-t-lg" style={imageStyle} src={property.imgUrl} alt="Property" />
           </Link>
           <div className="p-5">
             <Link to={`/property/${property.id}`}>

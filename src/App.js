@@ -57,7 +57,6 @@ function App() {
             <Routes>
               <Route exect path="" element={<Home />}></Route>
               <Route path="/property/:id" element={<ViewProperty />}></Route>
-
               <Route path="/add-property" element={<AddProperty />}></Route>
               <Route path="/add-offer" element={<AddOffer />}></Route>
               <Route path="/signup" element={<RegisterPage />}></Route>
@@ -68,9 +67,7 @@ function App() {
               <Route path="/property/:id" element={<PropertyPage />}></Route>
               <Route path="/owner-offer-history" element={<OfferHistoryPage />}></Route>
               <Route path="/owner-live-offers" element={<LiveOfferPage />}></Route>
-              {/* <Route path="/property/:id" element={<PropertyPage />}></Route> */}
-
-
+              <Route path="/offers" element={<OfferHistoryPage />}></Route>
               <Route path="/home" element={<Home />}></Route>
               <Route path="/favorite" element={<Favorite />}></Route>
             </Routes>

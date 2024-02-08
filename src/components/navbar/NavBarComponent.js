@@ -61,15 +61,7 @@ const NavBarComponent = () => {
     return userType == 'Owner' ? true : false
   }
 
-  const hasRoleOwner = () => {
-    try {
-      if (auth.user.realm_access.roles.includes('Owner')) {
-        return true
-      }
-    } catch (error) {
-      return false
-    }
-  }
+ 
   const hasRoleAdmin = () => {
     try {
       if (auth.user.realm_access.roles.includes('Admin')) {
@@ -137,6 +129,20 @@ const NavBarComponent = () => {
     }
     return favorite
   }
+  const populateOffers = () => {
+    let offers = ''
+    if (hasRoleCustomer()) {
+      offers = (
+        <li>
+          <Link to={'/offers'} class="nav-link px-2 text-white">
+            Offers
+          </Link>
+        </li>
+      )
+    }
+    return offers
+  }
+ 
 
   return (
     <header class="text-bg-primary p-3">
@@ -170,6 +176,7 @@ const NavBarComponent = () => {
                 About
               </Link>
             </li>
+            {populateOffers()}
             {populateFavorite()}
             {populatUserManagement()}
             {populateAddProperty()}
