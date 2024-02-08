@@ -19,6 +19,7 @@ import AddOffer from "./pages/AddOffer";
 import Home from "./pages/Home";
 import ViewProperty from "./pages/ViewProperty";
 import Favorite from "./pages/favorite";
+import OwnerMessagePage from "./pages/OwnerMessagePage";
 
 
 axios.interceptors.request.use(function (config) {
@@ -68,6 +69,7 @@ function App() {
               <Route path="/property/:id" element={<PropertyPage />}></Route>
               <Route path="/owner-offer-history" element={<OfferHistoryPage />}></Route>
               <Route path="/owner-live-offers" element={<LiveOfferPage />}></Route>
+              <Route path="/messages" element={<OwnerMessagePage />}></Route>
               {/* <Route path="/property/:id" element={<PropertyPage />}></Route> */}
 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Link } from 'react-router-dom'
 
 function LiveOfferPage() {
   const [offers, setOffers] = useState([])
@@ -68,6 +69,12 @@ function LiveOfferPage() {
                 <p className="card-text">
                   Date: {new Date(offer.localDateTime).toLocaleDateString()}
                 </p>
+                <Link
+                  to={`/messages?from=${offer.offerFrom.id}&to=${offer.offerTo.id}`}
+                  className="btn btn-outline-primary mr-2"
+                >
+                  View Message
+                </Link>
                 <button
                   className="btn btn-success mr-2"
                   onClick={() => handleOfferStatusChange(offer.id, 'Accepted')}
