@@ -26,6 +26,12 @@ const Favorite = () => {
     });
   }
 
+  const imageStyle = {
+    objectFit: 'cover',
+    height: '200px',
+    borderRadius: '0.5rem 0.5rem 0 0',
+  };
+
   return (
     <div className="list_cart">
       <div class="container album py-5 bg-light list_card">
@@ -36,7 +42,8 @@ const Favorite = () => {
             return (
               <div class="col">
                 <div class="card shadow-sm">
-                  <title>{data.propertyName}</title>
+                  <title>{data.location}</title>
+                  <h3>{data.propertyHomeType}</h3>
                   <rect width="100%" height="100%" fill="#55595c"></rect>
 
                   {/* <img
@@ -47,22 +54,22 @@ const Favorite = () => {
 
                   <div class="card-body">
                     <div class="fs-4">
-                      <strong>${data.rentAmount} </strong>
+                      <strong> {data.location}</strong>
+                      <img  style={imageStyle} src={data.imgUrl}/>
                     </div>
                     <div>
-                      {data.numberOfRooms} bds | {data.numberOfBathRooms} ba |{" "}
-                      {data.squareFeet} sqft- {data.propertyType}
+                      {data.numberOfRooms} Bedrooms
                     </div>
                     <p class="card-text">
-                      {data.address} {data.street}, {data.city}, {data.zip}
+                    {data.propertySaleType + ", " + data.propertyStatus}
                     </p>
 
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
                         <Link
-                          to={`/property/${data.id}`}
+                          to={`/propertyHome/${data.id}`}
                           type="button"
-                          class="btn btn-sm btn-outline-secondary"
+                          class="btn btn-sm btn-secondary"
                         >
                           View
                         </Link>
@@ -70,7 +77,7 @@ const Favorite = () => {
                         <Link
                           onClick={() => DeleteFavorite(data.id)}
                           type="button"
-                          class="btn btn-sm btn-outline-secondary"
+                          class="btn btn-sm btn-danger"
                         >
                           Remove favorite
                         </Link>

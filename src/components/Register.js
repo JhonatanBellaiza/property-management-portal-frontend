@@ -25,7 +25,6 @@ const InputField = ({ label, type, name, placeholder, required, value, onChange,
 );
 
 const Register = () => {
-  //const [userType, setUserType] = useState("user");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",

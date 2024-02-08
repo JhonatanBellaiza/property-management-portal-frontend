@@ -19,6 +19,8 @@ import AddOffer from "./pages/AddOffer";
 import Home from "./pages/Home";
 import ViewProperty from "./pages/ViewProperty";
 import Favorite from "./pages/favorite";
+import CustomerHistoryOffers from "./pages/CustomerHistoryOffers";
+import CustomerLiveOffers from "./pages/CustomerLiveOffers";
 
 
 axios.interceptors.request.use(function (config) {
@@ -42,6 +44,10 @@ axios.interceptors.response.use(
       console.log('Unauthorized');
       window.location.href = '/login';
     }
+
+    if(err.response.status == 400) {
+      alert(err.response.data.errorMessage)
+    }
     return Promise.reject(err)
   }
 )
@@ -58,10 +64,14 @@ function App() {
             <Route exect path="" element={<Home />}></Route>
             <Route path="/signup" element={<RegisterPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/property/:id" element={<ViewProperty />}></Route>
-            <Route path="/property/:id" element={<PropertyPage />}></Route>
             <Route path="/home" element={<Home />}></Route>
-            <Route path="/favorite" element={<Favorite />}></Route>
+
+            {(userType === 'Owner' || userType === 'Customer') && (
+              <>
+                <Route path="/propertyHome/:id" element={<ViewProperty />}></Route>
+                <Route path="/property/:id" element={<PropertyPage />}></Route>
+              </>
+            )}
 
             {/* Private Routes */}
             {userType === 'Admin' && (
@@ -79,7 +89,13 @@ function App() {
                 <Route path="/owner-live-offers" element={<LiveOfferPage />}></Route>
               </>
             )}
-
+            {userType === 'Customer' && (
+              <>
+              <Route path="/customer-offer-history" element={<CustomerHistoryOffers />}></Route>
+              <Route path="/customer-offer-live" element={<CustomerLiveOffers />}></Route>
+              <Route path="/favorite" element={<Favorite />}></Route>
+              </>
+            )}
             {/* Catch-all route */}
             <Route path="*" element={<Navigate to="/" />} />
 
