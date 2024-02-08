@@ -1,0 +1,152 @@
+.chat-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-messages {
+  max-height: 300px; /* Adjust as needed */
+  overflow-y: auto;
+}
+
+.message-sent {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.message-received {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.chat-input button:hover {
+  background-color: #0056b3;
+}
+
+.text-danger {
+  color: red;
+}
+
+.chat-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f0f0f0; /* Background color for the chat container */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-messages {
+  max-height: 300px; /* Adjust as needed */
+  overflow-y: auto;
+}
+
+.message-container {
+  margin-bottom: 10px;
+}
+
+.message-sent .message-bubble {
+  background-color: #dcf8c6; /* Background color for sent messages */
+  border-radius: 15px 15px 0 15px;
+  padding: 10px 15px;
+  max-width: 70%;
+  margin-left: auto;
+}
+
+.message-received .message-bubble {
+  background-color: #e5e5ea; /* Background color for received messages */
+  border-radius: 15px 15px 15px 0;
+  padding: 10px 15px;
+  max-width: 70%;
+  margin-right: auto;
+}
+
+.message-bubble p {
+  margin: 0;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px; /* Rounded input box */
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 20px; /* Rounded send button */
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.chat-input button:hover {
+  background-color: #0056b3;
+}
+
+.text-danger {
+  color: red;
+}
+
+.chat-messages {
+  max-height: 300px; /* Adjust as needed */
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.chat-messages::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+.message-sent .message-bubble {
+  background-color: #dcf8c6; /* Background color for sent messages */
+  border-radius: 15px;
+  padding: 10px;
+  max-width: 70%;
+  margin-left: auto;
+}
+
+.message-received .message-bubble {
+  background-color: #e5e5ea; /* Background color for received messages */
+  border-radius: 15px;
+  padding: 10px;
+  max-width: 70%;
+  margin-right: auto;
+}
+.date-text {
+  font-weight: lighter; /* Make the date text weight light */
+  color: #888; /* Subtle color for the date text */
+  font-size: smaller; /* Adjust the font size as needed */
+}

@@ -83,6 +83,7 @@ function App() {
                 <Route path="/owner-offer-history" element={<OfferHistoryPage />}></Route>
                 <Route path="/owner-live-offers" element={<LiveOfferPage />}></Route>
                 <Route path="/property/:id" element={<PropertyPage />}></Route>
+                <Route path="/messages" element={<OwnerMessagePage />}></Route>
               </>
             )}
             {userType === 'Customer' && (

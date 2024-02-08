@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios' // Make sure axios is installed in your project
 import { useLocation, useParams } from 'react-router-dom'
+import './OwnerMessagePage.css' // Import your CSS file
 
 function OwnerMessagePage() {
   const [messages, setMessages] = useState([])
@@ -12,6 +13,7 @@ function OwnerMessagePage() {
   const params = new URLSearchParams(location.search)
   const from = params.get('from')
   const to = params.get('to')
+
   useEffect(() => {
     // Fetch messages from your API endpoint
     axios
@@ -46,7 +48,9 @@ function OwnerMessagePage() {
         setSendMessageError(null)
         // Refresh messages after sending a new message
         axios
-          .get('YOUR_API_ENDPOINT')
+          .get(
+            `http://localhost:8080/api/message/${from}/getAllMessagesByBetweenUsers/${to}`
+          )
           .then((response) => {
             setMessages(response.data)
           })
@@ -62,31 +66,38 @@ function OwnerMessagePage() {
   }
 
   return (
-    <div>
+    <div className="chat-container">
       <h1>Messages</h1>
-      <div className="form-group">
-        <label htmlFor="contentInput">Content</label>
+      <div className="chat-messages">
+        {messages.map((message) => (
+          <div
+            key={message.id}
+            className={message.from == to ? 'message-sent' : 'message-received'}
+          >
+            <div className="message-bubble">
+              <strong className="date-text">
+                {' '}
+                {new Date(message.dateTime).toLocaleTimeString('en-US', {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  hour12: true,
+                })}
+              </strong>
+              <p>{message.content}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="chat-input">
         <input
           type="text"
-          className="form-control"
-          id="contentInput"
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          placeholder="Type your message..."
         />
+        <button onClick={handleSubmit}>Send</button>
       </div>
-      <button className="btn btn-primary" onClick={handleSubmit}>
-        Send Message
-      </button>
       {sendMessageError && <p className="text-danger">{sendMessageError}</p>}
-      <ul>
-        {messages.map((message) => (
-          <li key={message.id}>
-            <strong>Date: {new Date(message.dateTime).toLocaleString()}</strong>
-            <br />
-            {message.content}
-          </li>
-        ))}
-      </ul>
     </div>
   )
 }
