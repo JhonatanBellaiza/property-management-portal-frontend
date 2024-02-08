@@ -70,15 +70,7 @@ const NavBarComponent = () => {
       return false
     }
   }
-  const hasRoleAdmin = () => {
-    try {
-      if (auth.user.realm_access.roles.includes('Admin')) {
-        return true
-      }
-    } catch (error) {
-      return false
-    }
-  }
+
   const hasRoleCustomer = () => {
     try {
       if (localStorage.getItem("userType"
@@ -92,11 +84,29 @@ const NavBarComponent = () => {
     }
   }
 
+  const populateHome = () => {
+    const utype = localStorage.getItem("userType");
+    if((utype == null || !utype) || utype == 'Customer') {
+      return (
+        <>
+            <li>
+              <Link to={'/home'} class="nav-link px-2 text-white">
+                Home
+              </Link>
+            </li>
+        </>
+      )
+    }
+  }
+
   const populateAddProperty = () => {
     console.log(isOwner())
     if (isOwner()) {
       return (
         <>
+          <Link to={'/owner-dashboard'} className="nav-link px-2 text-white">
+            Owner Dashboard
+          </Link>
           <Link to={'/add-property'} className="nav-link px-2 text-white">
             Add Property
           </Link>
@@ -113,16 +123,18 @@ const NavBarComponent = () => {
 
   const populatUserManagement = () => {
     let userManagement = ''
-    if (hasRoleAdmin()) {
-      userManagement = (
-        <li>
-          <Link to={'/users'} class="nav-link px-2 text-white">
-            User Management
+    if (localStorage.getItem("userType") == 'Admin') {
+      return (
+        <>
+          <Link to={'/admin-dashboard'} className="nav-link px-2 text-white">
+            Dashboard
           </Link>
-        </li>
+          <Link to={'/manage-requests'} className="nav-link px-2 text-white">
+            Manage Requests
+          </Link>
+        </>
       )
     }
-    return userManagement
   }
   const populateFavorite = () => {
     let favorite = ''
@@ -137,6 +149,27 @@ const NavBarComponent = () => {
     }
     return favorite
   }
+  const populateOffers = () => {
+    let offers = ''
+    if (hasRoleCustomer()) {
+      offers = (
+        <>
+                <li>
+        <Link to={'/customer-offer-history'} class="nav-link px-2 text-white">
+          Offers History
+        </Link>
+      </li>
+        <li>
+              <Link to={'/customer-offer-live'} class="nav-link px-2 text-white">
+                Live Offers
+              </Link>
+          </li>
+        </>
+      )
+    }
+    return offers
+  }
+ 
 
   return (
     <header class="text-bg-primary p-3">
@@ -160,16 +193,8 @@ const NavBarComponent = () => {
           </Link>
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li>
-              <Link to={'/home'} class="nav-link px-2 text-white">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to={'/Chart'} class="nav-link px-2 text-white">
-                About
-              </Link>
-            </li>
+            {populateHome()}
+            {populateOffers()}
             {populateFavorite()}
             {populatUserManagement()}
             {populateAddProperty()}
